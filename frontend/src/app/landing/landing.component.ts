@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NgOptimizedImage } from '@angular/common';
-import { MatButton } from '@angular/material/button';
+import {MatAnchor, MatButton} from '@angular/material/button';
+import {RouterLink} from '@angular/router';
 
 
 
 @Component({
   selector: 'app-landing',
   standalone: true,
-  imports: [MatToolbarModule, NgOptimizedImage, MatButton],
+  imports: [MatToolbarModule, NgOptimizedImage, MatButton, RouterLink, MatAnchor],
   templateUrl: './landing.component.html',
   styleUrls: ['./landing.component.scss']
 })

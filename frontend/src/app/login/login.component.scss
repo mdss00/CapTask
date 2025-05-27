@@ -1,0 +1,192 @@
+body, a, button {
+  cursor: url("/cursor-anchor32.png") 16 16, auto;
+}
+button:hover , a:hover{
+  cursor: url("/cursor-anchor32.png") 16 16, auto;
+}
+
+p, span,li, a, label, h1, h2, h3, h4, h5, h6 {
+  cursor: text;
+}
+
+input, textarea, select{
+  cursor: text;
+}
+
+.app-logo{
+  z-index: 5;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100px;
+  width: 100px;
+}
+
+.form-field{
+  z-index: 5;
+}
+.ocean {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to bottom, #F9F0E3 0%, #cfe9f1 100%);
+  overflow: hidden;
+  z-index: 0;
+}
+
+.contenedor-login {
+  height: 100vh; /* altura completa */
+  display: flex;
+  justify-content: center; /* centrar horizontalmente */
+  align-items: center;     /* centrar verticalmente */
+  background-color: #f5f5f5;
+}
+
+.formulario-login {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  width: 300px;
+}
+
+.campo {
+  width: 100%;
+}
+
+.boton {
+  width: 100%;
+}
+h1{
+  z-index: 5;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: rgba(0, 0, 0, 0.87);
+
+}
+/* Burbuja base */
+.bubble {
+  position: absolute;
+  bottom: -40px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  opacity: 0.7;
+  animation-name: rise;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+}
+
+/* Animación de subida */
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Burbuja 1 */
+.bubble1 {
+  left: 10vw;
+  width: 15px;
+  height: 15px;
+  animation-duration: 6s;
+  animation-delay: 0s;
+}
+/* Burbuja 2 */
+.bubble2 {
+  left: 25vw;
+  width: 20px;
+  height: 20px;
+  animation-duration: 8s;
+  animation-delay: 1.5s;
+}
+/* Burbuja 3 */
+.bubble3 {
+  left: 40vw;
+  width: 12px;
+  height: 12px;
+  animation-duration: 7s;
+  animation-delay: 3s;
+}
+/* Burbuja 4 */
+.bubble4 {
+  left: 55vw;
+  width: 18px;
+  height: 18px;
+  animation-duration: 5s;
+  animation-delay: 2s;
+}
+/* Burbuja 5 */
+.bubble5 {
+  left: 70vw;
+  width: 10px;
+  height: 10px;
+  animation-duration: 9s;
+  animation-delay: 4s;
+}
+/* Burbuja 6 */
+.bubble6 {
+  left: 80vw;
+  width: 22px;
+  height: 22px;
+  animation-duration: 6.5s;
+  animation-delay: 1s;
+}
+/* Burbuja 7 */
+.bubble7 {
+  left: 90vw;
+  width: 14px;
+  height: 14px;
+  animation-duration: 7.5s;
+  animation-delay: 2.5s;
+}
+/* Burbuja 8 */
+.bubble8 {
+  left: 5vw;
+  width: 17px;
+  height: 17px;
+  animation-duration: 6.2s;
+  animation-delay: 0.8s;
+}
+/* Burbuja 9 */
+.bubble9 {
+  left: 30vw;
+  width: 11px;
+  height: 11px;
+  animation-duration: 7.8s;
+  animation-delay: 3.2s;
+}
+/* Burbuja 10 */
+.bubble10 {
+  left: 50vw;
+  width: 19px;
+  height: 19px;
+  animation-duration: 5.5s;
+  animation-delay: 4.5s;
+}
+
+@keyframes boatMove {
+  0% {
+    left: -150px;
+    transform: rotate(0deg);
+  }
+  50% {
+    left: calc(100% + 150px);
+    transform: rotate(5deg);
+  }
+  100% {
+    left: -150px;
+    transform: rotate(0deg);
+  }
+}

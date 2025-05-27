@@ -1,6 +1,10 @@
+<body>
 <mat-toolbar color="primary" class="app-toolbar">
   <img ngSrc="/captaskLogo.png" alt="Logo" class="app-logo" height="1024" width="1024"/>
-  <span class="app-title">Mi Aplicación</span>
+  <span style="flex-grow: 1;"></span>
+
+  <a mat-button routerLink="/login" class="app-login">Iniciar Sesión</a>
+  <a mat-button routerLink="/register" class="app-register">Registrarse</a>
 </mat-toolbar>
 
 <div class="ocean">
@@ -27,3 +31,4 @@
     </div>
   </section>
 </div>
+</body>
