@@ -1,4 +1,4 @@
-body, a, button {
+.landing-body, a, button {
   cursor: url("/cursor-anchor32.png") 16 16, auto;
 }
 button:hover , a:hover{
@@ -119,4 +119,37 @@ input, textarea, select{
   padding-top: 120px; /* Para no quedar oculto bajo la toolbar */
   text-align: center;
   color: #000; /* Cambia si lo necesitas para contraste */
+}
+
+
+.hero {
+  display: inline-block; /* El bloque se ajusta a su contenido */
+  padding: 2rem;
+  margin: 0 auto;
+  text-align: center;
+  background: transparent;
+}
+
+.hero h1,
+.hero p,
+.hero button {
+  margin: 0.5rem 0;
+  white-space: nowrap; /* Opcional: evita que se dividan en múltiples líneas */
+}
+
+.features {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.feature {
+  display: inline-block;
+  text-align: center;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }

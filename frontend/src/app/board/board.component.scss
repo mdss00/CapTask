@@ -1,0 +1,89 @@
+.board-container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  background: #f3f4f6;
+  height: 70%;
+  box-sizing: border-box;
+  margin: 1%;
+}
+
+.columns {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  flex: 1;
+  overflow-y: hidden;
+}
+
+.column {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  flex: 1;
+  min-width: 250px;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.tasks {
+  background: #e5e7eb;
+  padding: 10px;
+  border-radius: 4px;
+  flex: 1;
+  overflow-y: auto; /* Solo esta parte hace scroll si hay muchas tareas */
+}
+
+.board-body, a, button {
+  cursor: url("/cursor-anchor32.png") 16 16, auto;
+}
+button:hover , a:hover{
+  cursor: url("/cursor-anchor32.png") 16 16, auto;
+}
+
+p, span,li, a, label, h1, h2, h3, h4, h5, h6 {
+  cursor: text;
+}
+
+input, textarea, select{
+  cursor: text;
+}
+
+.app-toolbar {
+  background-color: #F9F0E3;
+  height: 100px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+}
+
+.app-logo {
+  object-fit: contain;
+  margin: 0;
+  display: block;
+  height: 100px;
+  width: 100px;
+}
+
+.title{
+  width: fit-content;
+  margin-left:1%;
+}
+
+.add-column-btn{
+  display: inline;
+}
+
+.board-body{
+  height: 100vh;
+}
+
+.board-header, .column-header{
+  display: flex;
+  align-items: center;
+  gap:1%;
+}

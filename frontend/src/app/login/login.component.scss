@@ -175,18 +175,18 @@ h1{
   animation-duration: 5.5s;
   animation-delay: 4.5s;
 }
-
-@keyframes boatMove {
-  0% {
-    left: -150px;
-    transform: rotate(0deg);
-  }
-  50% {
-    left: calc(100% + 150px);
-    transform: rotate(5deg);
-  }
-  100% {
-    left: -150px;
-    transform: rotate(0deg);
-  }
+.login-body, a, button {
+  cursor: url("/cursor-anchor32.png") 16 16, auto;
 }
+button:hover , a:hover{
+  cursor: url("/cursor-anchor32.png") 16 16, auto;
+}
+
+p, span,li, a, label, h1, h2, h3, h4, h5, h6 {
+  cursor: text;
+}
+
+input, textarea, select{
+  cursor: text;
+}
+
