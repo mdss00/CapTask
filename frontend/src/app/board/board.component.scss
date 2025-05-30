@@ -6,6 +6,7 @@
   height: 70%;
   box-sizing: border-box;
   margin: 1%;
+  z-index: 5;
 }
 
 .columns {
@@ -14,6 +15,7 @@
   gap: 20px;
   flex: 1;
   overflow-y: hidden;
+  z-index: 5;
 }
 
 .column {
@@ -26,6 +28,8 @@
   height: 90%;
   display: flex;
   flex-direction: column;
+  max-height: 100%;
+  border: solid 1px darkseagreen;
 }
 
 .tasks {
@@ -59,6 +63,7 @@ input, textarea, select{
   align-items: center;
   position: relative;
   z-index: 10;
+  border-bottom: solid 1px darkseagreen;
 }
 
 .app-logo {
@@ -67,6 +72,7 @@ input, textarea, select{
   display: block;
   height: 100px;
   width: 100px;
+  border-bottom: solid 1px darkseagreen;
 }
 
 .title{
@@ -79,11 +85,211 @@ input, textarea, select{
 }
 
 .board-body{
+  position: relative;
   height: 100vh;
+  z-index: 5;
 }
 
 .board-header, .column-header{
   display: flex;
   align-items: center;
   gap:1%;
+  position: relative;
+  z-index: 6;
 }
+
+.column-header{
+  border-bottom: solid 1px darkseagreen;
+}
+.ocean {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+  left: 0;
+  background: linear-gradient(to bottom, #F9F0E3 0%, #cfe9f1 100%);
+  overflow: hidden;
+  z-index: 0;
+}
+
+/* Burbuja base */
+.bubble {
+  position: absolute;
+  bottom: -40px;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 50%;
+  opacity: 0.7;
+  animation-name: rise;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+}
+
+/* Animación de subida */
+@keyframes rise {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Burbuja 1 */
+.bubble1 {
+  left: 10vw;
+  width: 15px;
+  height: 15px;
+  animation-duration: 6s;
+  animation-delay: 0s;
+}
+/* Burbuja 2 */
+.bubble2 {
+  left: 25vw;
+  width: 20px;
+  height: 20px;
+  animation-duration: 8s;
+  animation-delay: 1.5s;
+}
+/* Burbuja 3 */
+.bubble3 {
+  left: 40vw;
+  width: 12px;
+  height: 12px;
+  animation-duration: 7s;
+  animation-delay: 3s;
+}
+/* Burbuja 4 */
+.bubble4 {
+  left: 55vw;
+  width: 18px;
+  height: 18px;
+  animation-duration: 5s;
+  animation-delay: 2s;
+}
+/* Burbuja 5 */
+.bubble5 {
+  left: 70vw;
+  width: 10px;
+  height: 10px;
+  animation-duration: 9s;
+  animation-delay: 4s;
+}
+/* Burbuja 6 */
+.bubble6 {
+  left: 80vw;
+  width: 22px;
+  height: 22px;
+  animation-duration: 6.5s;
+  animation-delay: 1s;
+}
+/* Burbuja 7 */
+.bubble7 {
+  left: 90vw;
+  width: 14px;
+  height: 14px;
+  animation-duration: 7.5s;
+  animation-delay: 2.5s;
+}
+/* Burbuja 8 */
+.bubble8 {
+  left: 5vw;
+  width: 17px;
+  height: 17px;
+  animation-duration: 6.2s;
+  animation-delay: 0.8s;
+}
+/* Burbuja 9 */
+.bubble9 {
+  left: 30vw;
+  width: 11px;
+  height: 11px;
+  animation-duration: 7.8s;
+  animation-delay: 3.2s;
+}
+/* Burbuja 10 */
+.bubble10 {
+  left: 50vw;
+  width: 19px;
+  height: 19px;
+  animation-duration: 5.5s;
+  animation-delay: 4.5s;
+}
+
+.tasks{
+  display: flex;
+  flex-direction: column;
+  gap: 5%;
+  background-color: white;
+  overflow-y: auto;
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  max-height: 100vh;
+}
+
+.task{
+  background: linear-gradient(to bottom, #F9F0E3 0%, #cfe9f1 100%);
+  border: solid 1px darkseagreen;
+  width:95%;
+  border-radius: 5px;
+  padding: 2%;
+  min-height: 20%;
+  max-height: 20%;
+}
+
+.task-title{
+  width: fit-content;
+  display: inline-block;
+  margin-right: 5%;
+}
+
+.priority-badge {
+  display: inline-block;
+  padding: 5px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  margin-top: 5px;
+  width:fit-content;
+}
+
+.priority-baja {
+  background-color: #3b82f6; /* azul */
+  display: inline-block;
+}
+
+.priority-media {
+  background-color: #10b981; /* verde */
+  display: inline-block;
+}
+
+.priority-alta {
+  background-color: #f59e0b; /* amarillo */
+}
+
+.priority-urgente {
+  background-color: #ef4444; /* rojo */
+}
+
+.sidenav-container {
+  height: 100vh;
+  width: 100%;
+}
+
+.task-sidenav {
+  width: 300px;
+  padding: 20px;
+  background-color: #f4f4f4;
+}
+
+.task-sidenav input,
+.task-sidenav select {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 6px;
+}
+

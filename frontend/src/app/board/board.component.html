@@ -1,37 +1,85 @@
-<div class="board-body">
-<mat-toolbar color="primary" class="app-toolbar">
-  <a routerLink="/">
-    <img ngSrc="/captaskLogo.png" alt="Logo" class="app-logo" height="1024" width="1024"/>
-  </a>
-</mat-toolbar>
-  <div class="board-header">
-    <p class="title" contenteditable="true">Tablero Kanban</p>
-    <button mat-icon-button (click)="addColumn()"
-            aria-label="Añadir columna"
-            class="add-column-btn"
-            matTooltip="Eliminar columna">
-      <mat-icon>add</mat-icon>
-    </button>
-  </div>
-<div class="board-container">
-  <div class="columns">
-    <div class="column" *ngFor="let column of columns">
-      <div class="column-header">
-      <h4 class="column-title" contenteditable="true">{{ column.title }}</h4>
-        <span style="flex-grow: 1;"></span>
-      <button
-        mat-icon-button
-        (click)="deleteColumn(column.id)"
-        aria-label="Eliminar columna"
-        matTooltip="Eliminar columna"
-        class="delete-column-btn">
-        <mat-icon>close</mat-icon>
-      </button>
+<mat-sidenav-container class="sidenav-container">
+
+  <!-- Contenido principal del tablero -->
+  <mat-sidenav-content>
+    <div class="board-body">
+      <mat-toolbar color="primary" class="app-toolbar">
+        <a routerLink="/">
+          <img ngSrc="/captaskLogo.png" alt="Logo" class="app-logo" height="1024" width="1024"/>
+        </a>
+      </mat-toolbar>
+
+      <div class="ocean">
+        <div class="bubble bubble1"></div>
+        <div class="bubble bubble2"></div>
+        <div class="bubble bubble3"></div>
+        <div class="bubble bubble4"></div>
+        <div class="bubble bubble5"></div>
+        <div class="bubble bubble6"></div>
+        <div class="bubble bubble7"></div>
+        <div class="bubble bubble8"></div>
+        <div class="bubble bubble9"></div>
+        <div class="bubble bubble10"></div>
       </div>
-      <div class="tasks">
-        <!-- Aquí irán las tareas -->
+
+      <div class="board-header">
+        <p class="title" contenteditable="true">Tablero Kanban</p>
+        <button mat-icon-button (click)="addColumn()" aria-label="Añadir columna" class="add-column-btn" matTooltip="Añadir columna">
+          <mat-icon>add</mat-icon>
+        </button>
+        <button mat-icon-button (click)="addTask(columns[0])" aria-label="Nueva tarea" class="add-column-btn" matTooltip="Nueva tarea">
+          <mat-icon>note_add</mat-icon>
+        </button>
+      </div>
+
+      <div class="board-container">
+        <div class="columns">
+          <div class="column" *ngFor="let column of columns">
+            <div class="column-header">
+              <h4 class="column-title" contenteditable="true">{{ column.title }}</h4>
+              <span style="flex-grow: 1;"></span>
+              <button mat-icon-button (click)="deleteColumn(column.id)" aria-label="Eliminar columna" matTooltip="Eliminar columna" class="delete-column-btn">
+                <mat-icon>close</mat-icon>
+              </button>
+            </div>
+            <div class="tasks">
+              <mat-card class="task" *ngFor="let task of column.tasks" (click)="openTask(task)">
+                <div class="task-header">
+                  <p class="task-title" contenteditable="true">{{ task.title }}</p>
+                  <span class="priority-badge" [ngClass]="getPriorityClass(task.priority)">
+                    {{ task.priority }}
+                  </span>
+                </div>
+              </mat-card>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
-</div>
+  </mat-sidenav-content>
+
+  <!-- Sidebar para editar tarea -->
+  <mat-sidenav #taskSidenav mode="side" position="end" [(opened)]="isSidenavOpen">
+    <ng-container *ngIf="selectedTask">
+      <h3>Editar tarea</h3>
+
+      <label for="taskTitle">Título:</label>
+      <input id="taskTitle" [(ngModel)]="selectedTask.title" />
+
+      <label for="taskPriority">Prioridad:</label>
+      <select id="taskPriority" [(ngModel)]="selectedTask.priority">
+        <option value="Baja">Baja</option>
+        <option value="Media">Media</option>
+        <option value="Alta">Alta</option>
+        <option value="Urgente">Urgente</option>
+      </select>
+
+      <label for="taskStatus">Estado (columna):</label>
+      <select id="taskStatus" [(ngModel)]="selectedTask.status">
+        <option *ngFor="let col of columns" [value]="col.title">{{ col.title }}</option>
+      </select>
+
+      <button mat-button (click)="closeSidenav()">Cerrar</button>
+    </ng-container>
+  </mat-sidenav>
+</mat-sidenav-container>
