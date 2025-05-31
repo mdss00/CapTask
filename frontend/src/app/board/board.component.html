@@ -42,13 +42,22 @@
                 <mat-icon>close</mat-icon>
               </button>
             </div>
-            <div class="tasks">
-              <mat-card class="task" *ngFor="let task of column.tasks" (click)="openTask(task)">
+            <div class="tasks"
+                 [id]="column.id"
+                 cdkDropList
+                 [cdkDropListData]="column.tasks"
+                 [cdkDropListConnectedTo]="connectedDropLists"
+                 (cdkDropListDropped)="onTaskDrop($event, column)">
+
+              <mat-card class="task"
+                        *ngFor="let task of column.tasks"
+                        cdkDrag
+                        (dblclick)="openTask(task)">
                 <div class="task-header">
                   <p class="task-title" contenteditable="true">{{ task.title }}</p>
                   <span class="priority-badge" [ngClass]="getPriorityClass(task.priority)">
-                    {{ task.priority }}
-                  </span>
+          {{ task.priority }}
+        </span>
                 </div>
               </mat-card>
             </div>

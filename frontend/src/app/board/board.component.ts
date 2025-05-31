@@ -5,7 +5,7 @@ import {RouterLink} from '@angular/router';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {MatTooltip} from '@angular/material/tooltip';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {MatCard} from '@angular/material/card';
 import {FormsModule} from '@angular/forms';
 import {MatSidenav, MatSidenavModule} from '@angular/material/sidenav';
@@ -39,7 +39,9 @@ interface Task {
     FormsModule,
     NgIf,
     MatSidenavModule,
-    MatButton
+    MatButton,
+    CdkDropList,
+    CdkDrag
   ],
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
@@ -74,17 +76,21 @@ export class BoardComponent {
     return Date.now().toString();
   }
 
-  onTaskDrop(event: CdkDragDrop<Task[]>, targetColumn: KanbanColumn): void {
-    if (event.previousContainer === event.container) {
+  onTaskDrop(event: CdkDragDrop<Task[]>, targetColumn: KanbanColumn) {
+    const prevContainer = event.previousContainer;
+    const currContainer = event.container;
+
+    if (prevContainer === currContainer) {
       moveItemInArray(targetColumn.tasks, event.previousIndex, event.currentIndex);
     } else {
       const movedTask = event.previousContainer.data[event.previousIndex];
-      // actualiza el status
+
+      // Actualizar el estado de la tarea (columna)
       movedTask.status = targetColumn.title;
 
       transferArrayItem(
         event.previousContainer.data,
-        targetColumn.tasks,
+        event.container.data,
         event.previousIndex,
         event.currentIndex
       );
@@ -121,4 +127,7 @@ export class BoardComponent {
 
   @ViewChild('taskSidenav') taskSidenav!: MatSidenav;
 
+  get connectedDropLists(): string[] {
+    return this.columns.map(column => column.id);
+  }
 }
