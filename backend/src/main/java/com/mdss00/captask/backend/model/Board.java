@@ -11,14 +11,12 @@ public class Board {
 
     private String titulo;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "board_id") // FK en tabla Column
+    @OneToMany(mappedBy = "board", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Column> columns;
 
-    @Lob  // Para textos largos
+    @Lob
     private String bitacora;
 
-    // Getters y Setters
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 

@@ -9,6 +9,7 @@ import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem} f
 import {MatCard} from '@angular/material/card';
 import {FormsModule} from '@angular/forms';
 import {MatSidenav, MatSidenavModule} from '@angular/material/sidenav';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 interface KanbanColumn {
   id: string;
@@ -47,6 +48,9 @@ interface Task {
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent {
+
+  constructor(private snackBar: MatSnackBar) {}
+
   columns: KanbanColumn[] = [
     { id: 'todo', title: 'Por hacer', tasks: []},
     { id: 'in-progress', title: 'En progreso', tasks: [] },
@@ -54,12 +58,22 @@ export class BoardComponent {
   ];
 
   addColumn() {
+    const baseTitle = 'Nueva columna';
+    let newTitle = baseTitle;
+    let suffix = 0;
+
+    // Incrementa el sufijo mientras exista ese título en las columnas (ignorando mayúsculas)
+    while (this.columns.some(col => col.title.toLowerCase() === newTitle.toLowerCase())) {
+      suffix++;
+      newTitle = `${baseTitle} ${suffix}`;
+    }
+
     const newId = 'col-' + Math.random().toString(36).substr(2, 9);
-    this.columns.push({ id: newId, title: 'Nueva columna', tasks: [] });
+    this.columns.push({ id: newId, title: newTitle, tasks: [] });
   }
 
-  deleteColumn(id: string): void {
-    this.columns = this.columns.filter(col => col.id !== id);
+  deleteColumn(columnId: string) {
+    this.columns = this.columns.filter(col => col.id !== columnId);
   }
 
   addTask(column: KanbanColumn): void {
@@ -130,4 +144,53 @@ export class BoardComponent {
   get connectedDropLists(): string[] {
     return this.columns.map(column => column.id);
   }
+
+  onStatusChange(newStatus: string) {
+    if (!this.selectedTask) return;
+
+    // Encuentra la columna actual comparando por título
+    const currentColumn = this.columns.find(col =>
+      col.tasks.some(task => task === this.selectedTask)
+    );
+
+    // Elimina la tarea de la columna actual
+    if (currentColumn) {
+      currentColumn.tasks = currentColumn.tasks.filter(
+        task => task !== this.selectedTask
+      );
+    }
+
+    // Actualiza el estado de la tarea
+    this.selectedTask.status = newStatus;
+
+    // Encuentra la nueva columna por título (no debería haber duplicados)
+    const newColumn = this.columns.find(col => col.title === newStatus);
+
+    // Agrega la tarea a la nueva columna
+    newColumn?.tasks.push(this.selectedTask);
+  }
+
+  onColumnTitleEdit(column: KanbanColumn, event: FocusEvent) {
+    const element = event.target as HTMLElement;
+    const newTitle = element.innerText.trim();
+
+    if (!newTitle) {
+      this.snackBar.open('El título no puede estar vacío', 'Cerrar', { duration: 3000 });
+      element.innerText = column.title;
+      return;
+    }
+
+    const exists = this.columns.some(col =>
+      col.title.toLowerCase() === newTitle.toLowerCase() && col.id !== column.id
+    );
+
+    if (exists) {
+      this.snackBar.open('Ya existe una columna con ese nombre', 'Cerrar', { duration: 3000 });
+      element.innerText = column.title;
+      return;
+    }
+
+    column.title = newTitle;
+  }
+
 }

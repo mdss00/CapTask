@@ -21,6 +21,7 @@ input, textarea, select{
   align-items: center;
   position: relative;
   z-index: 10;
+  border-bottom: solid 1px darkseagreen;
 }
 
 .app-logo {
@@ -115,10 +116,10 @@ input, textarea, select{
 }
 .landing-content {
   position: relative;
-  z-index: 5; /* Más que el fondo, menos que la toolbar */
-  padding-top: 120px; /* Para no quedar oculto bajo la toolbar */
+  z-index: 5;
+  padding-top: 120px;
   text-align: center;
-  color: #000; /* Cambia si lo necesitas para contraste */
+  color: #000;
 }
 
 

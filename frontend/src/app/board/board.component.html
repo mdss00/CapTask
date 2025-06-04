@@ -36,7 +36,7 @@
         <div class="columns">
           <div class="column" *ngFor="let column of columns">
             <div class="column-header">
-              <h4 class="column-title" contenteditable="true">{{ column.title }}</h4>
+              <h4 class="column-title" contenteditable="true" (blur)="onColumnTitleEdit(column, $event)">{{ column.title }}</h4>
               <span style="flex-grow: 1;"></span>
               <button mat-icon-button (click)="deleteColumn(column.id)" aria-label="Eliminar columna" matTooltip="Eliminar columna" class="delete-column-btn">
                 <mat-icon>close</mat-icon>
@@ -54,10 +54,10 @@
                         cdkDrag
                         (dblclick)="openTask(task)">
                 <div class="task-header">
-                  <p class="task-title" contenteditable="true">{{ task.title }}</p>
+                  <p class="task-title">{{ task.title }}</p>
                   <span class="priority-badge" [ngClass]="getPriorityClass(task.priority)">
-          {{ task.priority }}
-        </span>
+                    {{ task.priority }}
+                  </span>
                 </div>
               </mat-card>
             </div>
@@ -68,7 +68,7 @@
   </mat-sidenav-content>
 
   <!-- Sidebar para editar tarea -->
-  <mat-sidenav #taskSidenav mode="side" position="end" [(opened)]="isSidenavOpen">
+  <mat-sidenav #taskSidenav class="task-sidenav" mode="side" position="end" [(opened)]="isSidenavOpen">
     <ng-container *ngIf="selectedTask">
       <h3>Editar tarea</h3>
 
@@ -84,7 +84,7 @@
       </select>
 
       <label for="taskStatus">Estado (columna):</label>
-      <select id="taskStatus" [(ngModel)]="selectedTask.status">
+      <select id="taskStatus" [ngModel]="selectedTask.status" (ngModelChange)="onStatusChange($event)">
         <option *ngFor="let col of columns" [value]="col.title">{{ col.title }}</option>
       </select>
 

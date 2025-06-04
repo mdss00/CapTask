@@ -1,22 +1,23 @@
 package com.mdss00.captask.backend.model;
 
 import jakarta.persistence.*;
+import java.util.List;
 
 @Entity
-public class Task {
+public class Column {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String title;
 
-    private String status;
+    @OneToMany(mappedBy = "column", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Task> tasks;
 
     @ManyToOne
-    @JoinColumn(name = "column_id")
-    private Column column;
-
-    // Getters y setters
+    @JoinColumn(name = "board_id")
+    private Board board;
 
     public Long getId() {
         return id;
@@ -34,19 +35,12 @@ public class Task {
         this.title = title;
     }
 
-    public String getStatus() {
-        return this.status;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public Column getColumn() {
-        return column;
-    }
-
-    public void setColumn(Column column) {
-        this.column = column;
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 }
+
