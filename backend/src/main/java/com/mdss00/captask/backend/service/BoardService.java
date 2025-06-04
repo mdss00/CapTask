@@ -18,8 +18,8 @@ public class BoardService {
         return boardRepository.findAll();
     }
 
-    public Optional<Board> findById(Long id) {
-        return boardRepository.findById(id);
+    public Board findById(Long id) {
+        return boardRepository.findById(id).orElse(null);
     }
 
     public Board save(Board board) {

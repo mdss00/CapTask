@@ -68,7 +68,7 @@
   </mat-sidenav-content>
 
   <!-- Sidebar para editar tarea -->
-  <mat-sidenav #taskSidenav class="task-sidenav" mode="side" position="end" [(opened)]="isSidenavOpen">
+  <mat-sidenav #taskSidenav class="task-sidenav" position="end" mode="over" [disableClose]="true"[(opened)]="isSidenavOpen">
     <ng-container *ngIf="selectedTask">
       <h3>Editar tarea</h3>
 

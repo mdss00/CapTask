@@ -1,6 +1,6 @@
 package com.mdss00.captask.backend.controller;
-import com.mdss00.captask.backend.model.Column;
-import com.mdss00.captask.backend.service.ColumnService;
+import com.mdss00.captask.backend.model.BoardColumn;
+import com.mdss00.captask.backend.service.BoardColumnService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -8,28 +8,28 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/columns")
-public class ColumnController {
+public class BoardColumnController {
 
     @Autowired
-    private ColumnService columnService;
+    private BoardColumnService columnService;
 
     @GetMapping
-    public List<Column> getAllColumns() {
+    public List<BoardColumn> getAllColumns() {
         return columnService.getAllColumns();
     }
 
     @GetMapping("/{id}")
-    public Column getColumnById(@PathVariable Long id) {
+    public BoardColumn getColumnById(@PathVariable Long id) {
         return columnService.getColumnById(id);
     }
 
     @PostMapping
-    public Column createColumn(@RequestBody Column column) {
+    public BoardColumn createColumn(@RequestBody BoardColumn column) {
         return columnService.createColumn(column);
     }
 
     @PutMapping("/{id}")
-    public Column updateColumn(@PathVariable Long id, @RequestBody Column column) {
+    public BoardColumn updateColumn(@PathVariable Long id, @RequestBody BoardColumn column) {
         return columnService.updateColumn(id, column);
     }
 

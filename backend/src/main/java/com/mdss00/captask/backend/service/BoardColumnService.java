@@ -1,27 +1,28 @@
 package com.mdss00.captask.backend.service;
 
-import com.mdss00.captask.backend.model.Column;
-import com.mdss00.captask.backend.repository.ColumnRepository;
+import com.mdss00.captask.backend.model.BoardColumn;
+import com.mdss00.captask.backend.repository.BoardColumnRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class ColumnService {
+public class BoardColumnService {
 
     @Autowired
-    private ColumnRepository columnRepository;
+    private BoardColumnRepository columnRepository;
 
-    public List<Column> getAllColumns() {
+    public List<BoardColumn> getAllColumns() {
         return columnRepository.findAll();
     }
 
-    public Column getColumnById(Long id) {
+    public BoardColumn getColumnById(Long id) {
         return columnRepository.findById(id).orElse(null);
     }
 
-    public Column createColumn(Column column) {
+
+    public BoardColumn createColumn(BoardColumn column) {
         return columnRepository.save(column);
     }
 
@@ -29,7 +30,7 @@ public class ColumnService {
         columnRepository.deleteById(id);
     }
 
-    public Column updateColumn(Long id, Column newColumnData) {
+    public BoardColumn updateColumn(Long id, BoardColumn newColumnData) {
         return columnRepository.findById(id)
                 .map(column -> {
                     column.setTitle(newColumnData.getTitle());

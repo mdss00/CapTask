@@ -4,12 +4,13 @@ import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
-public class Column {
+public class BoardColumn {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column
     private String title;
 
     @OneToMany(mappedBy = "column", cascade = CascadeType.ALL, orphanRemoval = true)

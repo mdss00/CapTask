@@ -22,7 +22,7 @@ public class BoardController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Board> getBoardById(@PathVariable Long id) {
+    public Board getBoardById(@PathVariable Long id) {
         return boardService.findById(id);
     }
 

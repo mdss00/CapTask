@@ -74,6 +74,7 @@ export class BoardComponent {
 
   deleteColumn(columnId: string) {
     this.columns = this.columns.filter(col => col.id !== columnId);
+    this.closeSidenav()
   }
 
   addTask(column: KanbanColumn): void {
