@@ -292,3 +292,53 @@ input, textarea, select{
   margin-bottom: 15px;
   padding: 6px;
 }
+
+.log-btn{
+  width: 70px;
+  height: 70px;
+  margin-right: 1%;
+}
+
+.log-sidenav {
+  background-color: #F9F0E3;
+  width: 300px;
+  display: flex;
+  padding: 0;
+}
+
+.log-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.log-textarea {
+  flex-grow: 1;
+  min-height: 0;
+  resize: none;
+  width: 90%;
+  border: 1px solid #ccc;
+  padding: 8px;
+  white-space: pre-wrap;
+  background-color: #e8f5e9;
+  overflow-y: auto;
+  font-family: "Roboto", serif;
+  border-radius: 4px;
+}
+
+.log-input-container {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+  align-items: center;
+}
+
+.log-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 16px;
+}

@@ -30,6 +30,10 @@
         <button mat-icon-button (click)="addTask(columns[0])" aria-label="Nueva tarea" class="add-column-btn" matTooltip="Nueva tarea">
           <mat-icon>note_add</mat-icon>
         </button>
+        <span style="flex-grow: 1;"></span>
+        <button mat-icon-button (click)="showLog()" class="log-btn" aria-label="Nueva tarea" matTooltip="Bitácora">
+          <img ngSrc="/cuaderno_bitácora.png" fill alt="Bitácora"/>
+        </button>
       </div>
 
       <div class="board-container">
@@ -68,7 +72,7 @@
   </mat-sidenav-content>
 
   <!-- Sidebar para editar tarea -->
-  <mat-sidenav #taskSidenav class="task-sidenav" position="end" mode="over" [disableClose]="true"[(opened)]="isSidenavOpen">
+  <mat-sidenav #taskSidenav class="task-sidenav" position="end" mode="over" [disableClose]="true" [(opened)]="isSidenavOpen">
     <ng-container *ngIf="selectedTask">
       <h3>Editar tarea</h3>
 
@@ -91,4 +95,36 @@
       <button mat-button (click)="closeSidenav()">Cerrar</button>
     </ng-container>
   </mat-sidenav>
+
+  <mat-sidenav mode="over" position="start" [(opened)]="isLogOpen" disableClose class="log-sidenav">
+    <div class="log-container">
+      <div class="log-header">
+        <h3>Bitácora</h3>
+        <button mat-icon-button (click)="closeSidenavStart()" matTooltip="Cerrar">
+          <mat-icon>close</mat-icon>
+        </button>
+      </div>
+
+      <textarea class="log-textarea" #logTextArea [value]="logText" readonly></textarea>
+
+      <div class="log-input-container">
+        <mat-form-field appearance="fill" class="log-input">
+          <input matInput [(ngModel)]="newLogEntry" placeholder="Escribe una entrada..."/>
+        </mat-form-field>
+        <button mat-icon-button color="primary" (click)="addLogEntry()" aria-label="Añadir entrada" matTooltip="Añadir">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+
+    </div>
+  </mat-sidenav>
+
+
+  <!-- Contenido principal -->
+  <div>
+    <button mat-icon-button (click)="showLog()" matTooltip="Ver Bitácora">
+      <mat-icon>menu_book</mat-icon>
+    </button>
+    <!-- Aquí iría el resto de tu contenido -->
+  </div>
 </mat-sidenav-container>

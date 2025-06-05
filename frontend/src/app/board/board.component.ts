@@ -1,4 +1,4 @@
-import {Component, ViewChild} from '@angular/core';
+import {Component, ElementRef, ViewChild} from '@angular/core';
 import {NgClass, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {MatToolbar} from '@angular/material/toolbar';
 import {RouterLink} from '@angular/router';
@@ -10,6 +10,7 @@ import {MatCard} from '@angular/material/card';
 import {FormsModule} from '@angular/forms';
 import {MatSidenav, MatSidenavModule} from '@angular/material/sidenav';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {MatFormField, MatInput} from '@angular/material/input';
 
 interface KanbanColumn {
   id: string;
@@ -42,7 +43,9 @@ interface Task {
     MatSidenavModule,
     MatButton,
     CdkDropList,
-    CdkDrag
+    CdkDrag,
+    MatInput,
+    MatFormField,
   ],
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
@@ -142,6 +145,10 @@ export class BoardComponent {
 
   @ViewChild('taskSidenav') taskSidenav!: MatSidenav;
 
+  isLogOpen = false
+  logText: string = "";
+  newLogEntry: string = "";
+
   get connectedDropLists(): string[] {
     return this.columns.map(column => column.id);
   }
@@ -190,8 +197,45 @@ export class BoardComponent {
       element.innerText = column.title;
       return;
     }
-
+    let oldTitle = column.title
     column.title = newTitle;
+
+    if (oldTitle != newTitle){
+      this.newLogEntry = `Se ha cambiado el título de la columna de "${oldTitle}" a "${newTitle}"`;
+      if (this.newLogEntry.trim()) {
+      const timestamp = new Date().toLocaleString();
+      this.logText += `[${timestamp}] ${this.newLogEntry}\n\n`;
+      this.newLogEntry = "";
+      }
+    }
   }
 
+  showLog() {
+    this.isLogOpen = true;
+    this.scrollLogToBottom();
+  }
+
+  closeSidenavStart() {
+    this.isLogOpen = false;
+  }
+
+  addLogEntry() {
+    if (this.newLogEntry.trim()) {
+      const timestamp = new Date().toLocaleString();
+      this.logText += `[${timestamp}] ${this.newLogEntry}\n\n`;
+      this.newLogEntry = "";
+      this.scrollLogToBottom();
+    }
+  }
+
+  @ViewChild('logTextArea') logTextArea!: ElementRef<HTMLTextAreaElement>;
+
+  scrollLogToBottom(): void {
+    setTimeout(() => {
+      const el = this.logTextArea?.nativeElement;
+      if (el) {
+        el.scrollTop = el.scrollHeight;
+      }
+    });
+  }
 }
