@@ -1,4 +1,4 @@
-.landing-body, a, button {
+body, a, button {
   cursor: url("/cursor-anchor32.png") 16 16, auto;
 }
 button:hover , a:hover{
@@ -13,49 +13,18 @@ input, textarea, select{
   cursor: text;
 }
 
-.app-toolbar {
-  background-color: #F9F0E3;
-  height: 100px;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  position: relative;
-  z-index: 10;
-  border-bottom: solid 1px darkseagreen;
-}
-
 .app-logo {
-  height: 100%;
-  width: auto;
   object-fit: contain;
   margin: 0;
   display: block;
+  height: 100px;
+  width: 100px;
+  border-bottom: solid 1px darkseagreen;
 }
 
-.app-login {
-  margin-left: 12px;
-  align-self: center;
-  font-size: 18px;
-  color: #000000 !important;
-
+.form-field{
+  z-index: 5;
 }
-
-.app-register {
-  margin-left: 12px;
-  background-color: black;
-  align-self: center;
-  font-size: 18px;
-  color: #F9F0E3 !important;
-  margin-right: 30px;
-
-}
-
-.app-register:hover {
-  background-color: #393131;
-  color: #F9F0E3;
-}
-
-/* Fondo animado estilo oceánico suave */
 .ocean {
   position: fixed;
   width: 100%;
@@ -67,6 +36,25 @@ input, textarea, select{
   z-index: 0;
 }
 
+.contenedor-boardlist {
+  height: 100vh; /* altura completa */
+  display: flex;
+  justify-content: center; /* centrar horizontalmente */
+  align-items: center;     /* centrar verticalmente */
+  background-color: #f5f5f5;
+}
+
+.boton {
+  width: 100%;
+}
+h1{
+  z-index: 5;
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: rgba(0, 0, 0, 0.87);
+
+}
 /* Burbuja base */
 .bubble {
   position: absolute;
@@ -172,65 +160,77 @@ input, textarea, select{
   animation-duration: 5.5s;
   animation-delay: 4.5s;
 }
-/* Contenido */
-.hero {
-  padding-top: 80px;
+.boardlist-body, a, button {
+  cursor: url("/cursor-anchor32.png") 16 16, auto;
+}
+button:hover , a:hover{
+  cursor: url("/cursor-anchor32.png") 16 16, auto;
+}
+
+p, span,li, a, label, h1, h2, h3, h4, h5, h6 {
+  cursor: text;
+}
+
+input, textarea, select{
+  cursor: text;
+}
+
+h1{
   text-align: center;
 }
 
-.container {
-  max-width: 960px;
-  margin: 0 auto;
-  padding: 2rem;
-}
-
-.features {
+.board-container {
   display: flex;
-  justify-content: space-around;
-  padding: 3rem 1rem;
+  align-items: flex-start;
+  margin-top: 5%;
 }
 
-.feature {
-  max-width: 300px;
+.empty-message {
+  font-size: 1.8rem;
+  color: #777;
   text-align: center;
 }
-.landing-content {
-  position: relative;
-  z-index: 5;
-  padding-top: 120px;
-  text-align: center;
-  color: #000;
-}
 
-
-.hero {
-  display: inline-block; /* El bloque se ajusta a su contenido */
-  padding: 2rem;
-  margin: 0 auto;
-  text-align: center;
-  background: transparent;
-}
-
-.hero h1,
-.hero p,
-.hero button {
-  margin: 0.5rem 0;
-  white-space: nowrap; /* Opcional: evita que se dividan en múltiples líneas */
-}
-
-.features {
+.board-list {
   display: flex;
-  justify-content: center;
-  gap: 2rem;
   flex-wrap: wrap;
-  margin-top: 2rem;
+  gap: 1rem;
+  justify-content: flex-start;
+  align-content: flex-start;
 }
 
-.feature {
-  display: inline-block;
-  text-align: center;
-  padding: 1rem;
-  background-color: rgba(255, 255, 255, 0.05);
+/* Tarjetas de board */
+.board-card {
+  width: 200px;
+  height: 150px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  background-color: #f9f9f9;
+  transition: background-color 0.2s;
+}
+
+.board-card:hover {
+  background-color: #f0f0f0;
+}
+
+.board-card.create {
+  background-color: #e8f5e9;
+  color: #388e3c;
+  font-weight: bold;
+}
+
+.app-toolbar {
+  background-color: #F9F0E3;
+  height: 100px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  position: relative;
+  z-index: 10;
+  border-bottom: solid 1px darkseagreen;
 }

@@ -14,7 +14,7 @@ public class Task {
 
     @ManyToOne
     @JoinColumn(name = "column_id")
-    private Column column;
+    private BoardColumn column;
 
     // Getters y setters
 
@@ -42,11 +42,11 @@ public class Task {
         this.status = status;
     }
 
-    public Column getColumn() {
+    public BoardColumn getColumn() {
         return column;
     }
 
-    public void setColumn(Column column) {
+    public void setColumn(BoardColumn column) {
         this.column = column;
     }
 }

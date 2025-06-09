@@ -1,0 +1,41 @@
+<div class="boardlist-body">
+  <mat-toolbar color="primary" class="app-toolbar">
+    <a routerLink="/">
+      <img ngSrc="/captaskLogo.png" alt="Logo" class="app-logo" height="1024" width="1024"/>
+    </a>
+  </mat-toolbar>
+
+<div class="ocean">
+  <div class="bubble bubble1"></div>
+  <div class="bubble bubble2"></div>
+  <div class="bubble bubble3"></div>
+  <div class="bubble bubble4"></div>
+  <div class="bubble bubble5"></div>
+  <div class="bubble bubble6"></div>
+  <div class="bubble bubble7"></div>
+  <div class="bubble bubble8"></div>
+  <div class="bubble bubble9"></div>
+  <div class="bubble bubble10"></div>
+</div>
+  <div class="board-container">
+    <h2>Tus tableros</h2>
+
+    <div *ngIf="boards.length === 0" class="empty-message">
+      Crea tu primer tablero
+    </div>
+    <div class="board-list">
+      <mat-card
+        class="board-card"
+        *ngFor="let board of boards">
+        <!--(click)="openBoard(board)"-->
+        <mat-card-title>{{ board.titulo }}</mat-card-title>
+      </mat-card>
+
+      <!-- Card para crear nuevo -->
+      <mat-card class="board-card create"> <!--(click)="createNewBoard()"-->
+        <mat-icon>add</mat-icon>
+        <span contenteditable="true">Nuevo tablero</span>
+      </mat-card>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div class="register-body">
+<a routerLink="/">
+  <img ngSrc="/captaskLogo.png" alt="Logo" class="app-logo" height="1024" width="1024"/>
+</a>
+
+<div class="ocean">
+  <div class="bubble bubble1"></div>
+  <div class="bubble bubble2"></div>
+  <div class="bubble bubble3"></div>
+  <div class="bubble bubble4"></div>
+  <div class="bubble bubble5"></div>
+  <div class="bubble bubble6"></div>
+  <div class="bubble bubble7"></div>
+  <div class="bubble bubble8"></div>
+  <div class="bubble bubble9"></div>
+  <div class="bubble bubble10"></div>
+</div>
+<div class="contenedor-register">
+
+  <form class="formulario-register" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+    <h1>Registrar nuevo usuario</h1>
+
+    <mat-form-field appearance="fill" class="campo">
+      <mat-label>Nombre de usuario</mat-label>
+      <input matInput placeholder="Ingrese su nombre de usuario" formControlName="nombre" />
+      <mat-error *ngIf="registerForm.get('nombre')?.invalid && registerForm.get('nombre')?.touched">
+        El nombre de usuario es obligatorio
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="campo">
+      <mat-label>Email</mat-label>
+      <input matInput placeholder="Ingrese su email" formControlName="email" />
+      <mat-error *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched">
+        Introduce un email válido
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="campo">
+      <mat-label>Contraseña</mat-label>
+      <input matInput type="password" placeholder="Ingrese su contraseña" formControlName="password" />
+      <mat-error *ngIf="registerForm.get('password')?.invalid && registerForm.get('password')?.touched">
+        La contraseña es obligatoria
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="campo">
+      <mat-label>Repetir contraseña</mat-label>
+      <input matInput type="password" placeholder="Repita su contraseña" formControlName="confirmPassword" />
+      <mat-error *ngIf="registerForm.get('confirmPassword')?.invalid && registerForm.get('confirmPassword')?.touched">
+        Debes repetir la contraseña
+      </mat-error>
+    </mat-form-field>
+
+    <div *ngIf="hasPasswordMismatchError()" class="error">
+      Las contraseñas no coinciden
+    </div>
+
+    <button mat-raised-button color="primary" class="boton" type="submit">Confirmar</button>
+  </form>
+</div>
+</div>

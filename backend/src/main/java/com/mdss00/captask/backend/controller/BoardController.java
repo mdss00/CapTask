@@ -1,9 +1,11 @@
 package com.mdss00.captask.backend.controller;
 import com.mdss00.captask.backend.model.Board;
 import com.mdss00.captask.backend.service.BoardService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api/boards")
@@ -40,5 +42,11 @@ public class BoardController {
     @DeleteMapping("/{id}")
     public void deleteBoard(@PathVariable Long id) {
         boardService.deleteById(id);
+    }
+
+    @GetMapping("/user/{email}")
+    public ResponseEntity<?> getBoardsByUserEmail(@PathVariable String email) {
+        Set<Board> boards = boardService.getBoardsByUserEmail(email);
+        return ResponseEntity.ok(boards);
     }
 }

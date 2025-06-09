@@ -8,6 +8,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/columns")
+@CrossOrigin(origins = "http://localhost:4200")
 public class BoardColumnController {
 
     @Autowired
