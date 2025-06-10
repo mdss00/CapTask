@@ -27,14 +27,12 @@
       <mat-card
         class="board-card"
         *ngFor="let board of boards">
-        <!--(click)="openBoard(board)"-->
-        <mat-card-title>{{ board.titulo }}</mat-card-title>
+        <mat-card-title contenteditable="true">{{ board.titulo }}</mat-card-title>
       </mat-card>
 
-      <!-- Card para crear nuevo -->
-      <mat-card class="board-card create"> <!--(click)="createNewBoard()"-->
+      <mat-card class="board-card create" (click)="crearBoardPorDefecto()">
         <mat-icon>add</mat-icon>
-        <span contenteditable="true">Nuevo tablero</span>
+        <span>Nuevo tablero</span>
       </mat-card>
     </div>
   </div>

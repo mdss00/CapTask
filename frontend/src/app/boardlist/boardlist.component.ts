@@ -9,6 +9,12 @@ import {MatToolbar} from '@angular/material/toolbar';
 import {AuthService} from '../services/auth.service';
 import {HttpClient} from '@angular/common/http';
 
+export interface Board {
+  titulo: string;
+  bitacora: string;
+  email: string;
+}
+
 @Component({
   selector: 'app-mi-app',
   imports: [
@@ -40,12 +46,16 @@ export class BoardListComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const email = this.authService.currentUser;
+    const email = typeof this.authService.currentUser === 'string'
+      ? this.authService.currentUser
+      : this.authService.currentUser?.email;
 
-    if (!email) {
+    if (!email || email == '') {
       this.router.navigate(['/login']);
       return;
     }
+
+    console.log('Usuario autenticado:', email);
 
     this.http.get<any[]>(`http://localhost:8080/api/boards/user/${email}`).subscribe({
       next: (boards) => {
@@ -56,4 +66,24 @@ export class BoardListComponent implements OnInit {
       }
     });
   }
+
+  crearBoardPorDefecto() {
+    const user = this.authService.currentUser;
+    const email = user?.email;
+
+    const nuevoBoard = {
+      titulo: 'Nuevo tablero',
+      bitacora: '',
+      email: email
+    };
+
+    this.http.post<Board>('http://localhost:8080/api/boards', nuevoBoard).subscribe({
+      next: (board) => {
+        this.boards.push(board);
+      },
+      error: (err) => {
+      }
+    });
+  }
+
 }

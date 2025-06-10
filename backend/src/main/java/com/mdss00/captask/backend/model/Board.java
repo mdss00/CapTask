@@ -1,4 +1,5 @@
 package com.mdss00.captask.backend.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 import java.util.HashSet;
@@ -20,6 +21,7 @@ public class Board {
     private String bitacora;
 
     @ManyToMany(mappedBy = "boards")
+    @JsonIgnore
     private Set<User> users = new HashSet<>();
 
     public Long getId() { return id; }
@@ -33,4 +35,12 @@ public class Board {
 
     public String getBitacora() { return bitacora; }
     public void setBitacora(String bitacora) { this.bitacora = bitacora; }
+
+    public Set<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<User> users) {
+        this.users = users;
+    }
 }

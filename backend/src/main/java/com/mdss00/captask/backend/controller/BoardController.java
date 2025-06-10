@@ -1,4 +1,5 @@
 package com.mdss00.captask.backend.controller;
+import com.mdss00.captask.backend.dto.BoardDto;
 import com.mdss00.captask.backend.model.Board;
 import com.mdss00.captask.backend.service.BoardService;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +30,13 @@ public class BoardController {
     }
 
     @PostMapping
-    public Board createBoard(@RequestBody Board board) {
-        return boardService.save(board);
+    public ResponseEntity<Board> createBoard(@RequestBody BoardDto request) {
+        Board board = boardService.createBoardForUser(
+                request.getEmail(),
+                request.getTitulo(),
+                request.getBitacora()
+        );
+        return ResponseEntity.ok(board);
     }
 
     @PutMapping("/{id}")
@@ -47,6 +53,7 @@ public class BoardController {
     @GetMapping("/user/{email}")
     public ResponseEntity<?> getBoardsByUserEmail(@PathVariable String email) {
         Set<Board> boards = boardService.getBoardsByUserEmail(email);
+        System.out.println(email);
         return ResponseEntity.ok(boards);
     }
 }

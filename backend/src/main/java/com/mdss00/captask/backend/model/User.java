@@ -18,15 +18,13 @@ public class User {
 
     private String password;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "user_board",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "board_id")
     )
-    private Set<Board> boards = new HashSet<>();
-
-    // Getters y Setters
+    private Set<Board> boards;
 
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }

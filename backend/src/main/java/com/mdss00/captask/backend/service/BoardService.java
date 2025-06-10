@@ -37,8 +37,25 @@ public class BoardService {
     }
 
     public Set<Board> getBoardsByUserEmail(String email) {
+        System.out.println(email);
         User user = userRepository.findByEmail(email).orElse(null);
         assert user != null;
         return user.getBoards();
+    }
+
+    public Board createBoardForUser(String email, String titulo, String bitacora) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado con email: " + email));
+
+        Board board = new Board();
+        board.setTitulo(titulo);
+        board.setBitacora(bitacora);
+
+        board = boardRepository.save(board);
+
+        user.getBoards().add(board);
+
+        userRepository.save(user);
+        return board;
     }
 }

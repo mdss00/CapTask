@@ -10,7 +10,7 @@ export class AuthService {
   constructor() {}
 
   private getUserFromStorage(): any {
-    const storedUser = localStorage.getItem('currentUser');
+    const storedUser = sessionStorage.getItem('currentUser');
     return storedUser ? JSON.parse(storedUser) : null;
   }
 
@@ -24,12 +24,12 @@ export class AuthService {
 
   login(user: any) {
     const userEmailOnly = { email: user.email };
-    localStorage.setItem('currentUser', JSON.stringify(userEmailOnly));
+    sessionStorage.setItem('currentUser', JSON.stringify(userEmailOnly));
     this.currentUserSubject.next(userEmailOnly);
   }
 
   logout() {
-    localStorage.removeItem('currentUser');
+    sessionStorage.removeItem('currentUser');
     this.currentUserSubject.next(null);
   }
 
