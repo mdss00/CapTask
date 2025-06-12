@@ -41,4 +41,18 @@ public class UserService {
     public boolean emailExists(String email) {
         return userRepository.findByEmail(email).isPresent();
     }
+
+    public User validarCredenciales(String email, String password) {
+        Optional<User> userOpt = userRepository.findByEmail(email);
+
+        if(userOpt.isPresent()) {
+            User user = userOpt.get();
+
+            // Aquí debes comparar la contraseña, idealmente hashed
+            if(user.getPassword().equals(password)) {
+                return user;
+            }
+        }
+        return null;
+    }
 }

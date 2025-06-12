@@ -6,6 +6,11 @@
   <a mat-button routerLink="/login" class="app-login">Iniciar Sesión</a>
   <a mat-button routerLink="/register" class="app-register">Registrarse</a>
 </mat-toolbar>
+  <div class="cerrar-div" style="display: flex;">
+    <button mat-button class="cerrar-sesion" *ngIf="isLogged" (click)="logout()">
+      Cerrar Sesión
+    </button>
+  </div>
   <div class="ocean">
     <div class="bubble bubble1"></div>
     <div class="bubble bubble2"></div>

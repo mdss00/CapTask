@@ -17,19 +17,19 @@
 </div>
 <div class="contenedor-login">
 
-  <form class="formulario-login">
+  <form class="formulario-login" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <h1>Iniciar sesión en CapTask</h1>
     <mat-form-field appearance="fill" class="campo">
       <mat-label>Usuario</mat-label>
-      <input matInput placeholder="Ingrese su usuario">
+      <input matInput placeholder="Ingrese su email" formControlName="email">
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="campo">
       <mat-label>Contraseña</mat-label>
-      <input matInput type="password" placeholder="Ingrese su contraseña">
+      <input matInput type="password" placeholder="Ingrese su contraseña" formControlName="password">
     </mat-form-field>
 
-    <button mat-raised-button color="primary" class="boton">Confirmar</button>
+    <button mat-raised-button color="primary" class="boton" type="submit">Confirmar</button>
 
   </form>
 </div>

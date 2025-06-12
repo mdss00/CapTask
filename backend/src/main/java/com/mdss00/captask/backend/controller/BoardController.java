@@ -39,21 +39,24 @@ public class BoardController {
         return ResponseEntity.ok(board);
     }
 
-    @PutMapping("/{id}")
-    public Board updateBoard(@PathVariable Long id, @RequestBody Board board) {
-        board.setId(id);
-        return boardService.save(board);
-    }
-
-    @DeleteMapping("/{id}")
-    public void deleteBoard(@PathVariable Long id) {
-        boardService.deleteById(id);
-    }
-
     @GetMapping("/user/{email}")
     public ResponseEntity<?> getBoardsByUserEmail(@PathVariable String email) {
         Set<Board> boards = boardService.getBoardsByUserEmail(email);
         System.out.println(email);
         return ResponseEntity.ok(boards);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBoard(
+            @PathVariable Long id,
+            @RequestParam String email) {
+        boardService.deleteBoardForUser(email, id);
+        return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Board> updateBoardTitle(@PathVariable Long id, @RequestBody String nuevoTitulo) {
+        Board updatedBoard = boardService.updateBoardTitle(id, nuevoTitulo);
+        return ResponseEntity.ok(updatedBoard);
     }
 }

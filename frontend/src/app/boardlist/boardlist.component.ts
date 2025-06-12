@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NgForOf, NgIf, NgOptimizedImage} from "@angular/common";
 import {Router, RouterLink} from '@angular/router';
 import {MatFormField, MatInput, MatLabel} from '@angular/material/input';
-import {MatAnchor, MatButton} from '@angular/material/button';
+import {MatAnchor, MatButton, MatIconButton} from '@angular/material/button';
 import {MatCard, MatCardSubtitle, MatCardTitle} from '@angular/material/card';
 import {MatIcon} from '@angular/material/icon';
 import {MatToolbar} from '@angular/material/toolbar';
@@ -31,7 +31,8 @@ export interface Board {
     MatIcon,
     NgIf,
     MatAnchor,
-    MatToolbar
+    MatToolbar,
+    MatIconButton
   ],
   templateUrl: './boardlist.component.html',
   styleUrl: './boardlist.component.scss'
@@ -86,4 +87,35 @@ export class BoardListComponent implements OnInit {
     });
   }
 
+  eliminarBoard(id: number) {
+    const email = this.authService.currentUser?.email || this.authService.currentUser;
+    if (!email) return;
+
+    this.http.delete(`http://localhost:8080/api/boards/${id}?email=${email}`).subscribe({
+      next: () => {
+        this.boards = this.boards.filter(board => board.id !== id);
+      },
+      error: (err) => {
+        console.error('Error al eliminar tablero:', err);
+      }
+    });
+  }
+
+  updateTitulo(event: FocusEvent, board: any) {
+    const nuevoTitulo = (event.target as HTMLElement).innerText.trim();
+
+    if (nuevoTitulo && nuevoTitulo !== board.titulo) {
+      this.http.put<Board>(`http://localhost:8080/api/boards/${board.id}`, nuevoTitulo, {
+        headers: { 'Content-Type': 'text/plain' }
+      }).subscribe({
+        next: (updatedBoard) => {
+          board.titulo = updatedBoard.titulo; // actualizar en UI
+          console.log('Título actualizado');
+        },
+        error: (err) => {
+          console.error('Error actualizando título', err);
+        }
+      });
+    }
+  }
 }

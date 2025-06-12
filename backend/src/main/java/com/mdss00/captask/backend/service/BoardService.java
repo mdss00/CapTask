@@ -4,6 +4,8 @@ import com.mdss00.captask.backend.model.User;
 import com.mdss00.captask.backend.repository.BoardRepository;
 import com.mdss00.captask.backend.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -57,5 +59,32 @@ public class BoardService {
 
         userRepository.save(user);
         return board;
+    }
+
+    @Transactional
+    public void deleteBoardForUser(String email, Long boardId) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new RuntimeException("Usuario no encontrado"));
+
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new RuntimeException("Board no encontrado"));
+
+        user.getBoards().remove(board);
+        board.getUsers().remove(user);
+
+        userRepository.save(user);
+        boardRepository.save(board);
+
+        if (board.getUsers().isEmpty()) {
+            boardRepository.delete(board);
+        }
+    }
+
+    public Board updateBoardTitle(Long id, String nuevoTitulo) {
+        Board board = boardRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Board no encontrado"));
+
+        board.setTitulo(nuevoTitulo);
+        return boardRepository.save(board);
     }
 }

@@ -1,5 +1,6 @@
 package com.mdss00.captask.backend.controller;
 
+import com.mdss00.captask.backend.dto.LoginDto;
 import com.mdss00.captask.backend.exceptions.EmailAlreadyUsedException;
 import com.mdss00.captask.backend.model.User;
 import com.mdss00.captask.backend.service.UserService;
@@ -53,5 +54,17 @@ public class UserController {
     @DeleteMapping("/{id}")
     public void deleteUser(@PathVariable Long id) {
         userService.deleteById(id);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody LoginDto request) {
+        User user = userService.validarCredenciales(request.getEmail(), request.getPassword());
+
+        if(user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Credenciales inválidas");
+        }
+
+        // Puedes devolver solo email o más info
+        return ResponseEntity.ok(user);
     }
 }
