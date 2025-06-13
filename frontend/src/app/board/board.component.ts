@@ -2,7 +2,7 @@ import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {NgClass, NgForOf, NgIf, NgOptimizedImage} from '@angular/common';
 import {MatToolbar} from '@angular/material/toolbar';
 import {ActivatedRoute, RouterLink} from '@angular/router';
-import {MatButton, MatIconButton} from '@angular/material/button';
+import {MatAnchor, MatButton, MatIconButton} from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import {MatTooltip} from '@angular/material/tooltip';
 import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
@@ -55,6 +55,7 @@ interface Task {
     CdkDrag,
     MatInput,
     MatFormField,
+    MatAnchor,
   ],
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss']
