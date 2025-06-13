@@ -1,5 +1,6 @@
 package com.mdss00.captask.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import java.util.List;
 
@@ -18,7 +19,14 @@ public class BoardColumn {
 
     @ManyToOne
     @JoinColumn(name = "board_id")
+    @JsonIgnore
     private Board board;
+
+    public BoardColumn() {}
+    public BoardColumn(String title, Board board) {
+        this.title = title;
+        this.board = board;
+    }
 
     public Long getId() {
         return id;
@@ -42,6 +50,14 @@ public class BoardColumn {
 
     public void setTasks(List<Task> tasks) {
         this.tasks = tasks;
+    }
+
+    public Board getBoard() {
+        return board;
+    }
+
+    public void setBoard(Board board) {
+        this.board = board;
     }
 }
 

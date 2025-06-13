@@ -1,5 +1,6 @@
 package com.mdss00.captask.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -12,8 +13,13 @@ public class Task {
 
     private String status;
 
+    private String priority;
+
+    private String description;
+
     @ManyToOne
     @JoinColumn(name = "column_id")
+    @JsonIgnore
     private BoardColumn column;
 
     // Getters y setters
@@ -49,4 +55,21 @@ public class Task {
     public void setColumn(BoardColumn column) {
         this.column = column;
     }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
 }

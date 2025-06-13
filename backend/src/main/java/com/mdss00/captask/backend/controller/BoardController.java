@@ -1,4 +1,5 @@
 package com.mdss00.captask.backend.controller;
+import com.mdss00.captask.backend.dto.BitacoraUpdateDTO;
 import com.mdss00.captask.backend.dto.BoardDto;
 import com.mdss00.captask.backend.model.Board;
 import com.mdss00.captask.backend.service.BoardService;
@@ -25,8 +26,9 @@ public class BoardController {
     }
 
     @GetMapping("/{id}")
-    public Board getBoardById(@PathVariable Long id) {
-        return boardService.findById(id);
+    public ResponseEntity<Board> getBoardById(@PathVariable Long id) {
+        Board board = boardService.findById(id);
+        return ResponseEntity.ok(board);
     }
 
     @PostMapping
@@ -58,5 +60,11 @@ public class BoardController {
     public ResponseEntity<Board> updateBoardTitle(@PathVariable Long id, @RequestBody String nuevoTitulo) {
         Board updatedBoard = boardService.updateBoardTitle(id, nuevoTitulo);
         return ResponseEntity.ok(updatedBoard);
+    }
+
+    @PutMapping("/{id}/bitacora")
+    public ResponseEntity<Void> updateBitacora(@PathVariable Long id, @RequestBody BitacoraUpdateDTO dto) {
+        boardService.updateBitacora(id, dto.getBitacora());
+        return ResponseEntity.ok().build();
     }
 }

@@ -1,7 +1,7 @@
 <div class="boardlist-body">
   <mat-toolbar color="primary" class="app-toolbar">
     <a routerLink="/">
-      <img ngSrc="/captaskLogo.png" alt="Logo" class="app-logo" height="1024" width="1024"/>
+      <img ngSrc="/captaskLogo.png" alt="Logo" class="app-logo" height="1024" width="1024" priority/>
     </a>
   </mat-toolbar>
 
@@ -26,8 +26,8 @@
     <div class="board-list">
       <mat-card
         class="board-card"
-        *ngFor="let board of boards">
-        <mat-card-title contenteditable="true" (blur)="updateTitulo($event, board)">{{ board.titulo }}</mat-card-title>
+        *ngFor="let board of boards" (dblclick)="goToBoard(board.id)">
+        <mat-card-title contenteditable="true" (blur)="updateTitulo($event, board)" >{{ board.titulo }}</mat-card-title>
         <button mat-icon-button (click)="eliminarBoard(board.id)">
           <mat-icon>delete</mat-icon>
         </button>

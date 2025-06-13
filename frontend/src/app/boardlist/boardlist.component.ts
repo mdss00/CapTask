@@ -118,4 +118,9 @@ export class BoardListComponent implements OnInit {
       });
     }
   }
+
+  goToBoard(id: number) {
+    console.log('board-' + id)
+    this.router.navigate(['/board',id]);
+  }
 }

@@ -1,5 +1,6 @@
 package com.mdss00.captask.backend.service;
 import com.mdss00.captask.backend.model.Board;
+import com.mdss00.captask.backend.model.BoardColumn;
 import com.mdss00.captask.backend.model.User;
 import com.mdss00.captask.backend.repository.BoardRepository;
 import com.mdss00.captask.backend.repository.UserRepository;
@@ -16,18 +17,37 @@ public class BoardService {
     private final UserRepository userRepository;
 
     private final BoardRepository boardRepository;
+    private final BoardColumnService boardColumnService;
 
-    public BoardService(UserRepository userRepository, BoardRepository boardRepository) {
+    public BoardService(UserRepository userRepository, BoardRepository boardRepository, BoardColumnService boardColumnService) {
         this.userRepository = userRepository;
         this.boardRepository = boardRepository;
+        this.boardColumnService = boardColumnService;
     }
 
     public List<Board> findAll() {
         return boardRepository.findAll();
     }
 
-    public Board findById(Long id) {
-        return boardRepository.findById(id).orElse(null);
+    public Board findById(Long boardId) {
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new RuntimeException("Board not found"));
+
+        if (board.getColumns() == null || board.getColumns().isEmpty()) {
+            BoardColumn board1 = new BoardColumn("Por hacer", board);
+            boardColumnService.createColumn(board1);
+            BoardColumn board2 = new BoardColumn("En progreso", board);
+            boardColumnService.createColumn(board1);
+            BoardColumn board3 = new BoardColumn("Hecho", board);
+            boardColumnService.createColumn(board1);
+
+            board.getColumns().add(board1);
+            board.getColumns().add(board2);
+            board.getColumns().add(board3);
+            boardRepository.save(board);
+        }
+
+        return board;
     }
 
     public Board save(Board board) {
@@ -86,5 +106,13 @@ public class BoardService {
 
         board.setTitulo(nuevoTitulo);
         return boardRepository.save(board);
+    }
+
+    public void updateBitacora(Long boardId, String nuevaBitacora) {
+        Board board = boardRepository.findById(boardId)
+                .orElseThrow(() -> new RuntimeException("Board no encontrado con id " + boardId));
+
+        board.setBitacora(nuevaBitacora);
+        boardRepository.save(board);
     }
 }

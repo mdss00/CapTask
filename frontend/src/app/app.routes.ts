@@ -20,7 +20,7 @@ export const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: 'board',
+    path: 'board/:id',
     component: BoardComponent,
   },
   {
