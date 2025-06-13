@@ -165,7 +165,7 @@ export class BoardComponent implements OnInit{
             // Actualizar la propiedad local de la tarea (status)
             movedTask.status = targetColumn.title;
             const timestamp = new Date().toLocaleString();
-            this.board.bitacora += `[${timestamp}] Se ha actualizado el estado de la tarea "${movedTask.title}"\n\n`;
+            this.board.bitacora += `[${timestamp}] Se ha actualizado el estado de la tarea "${updatedTask.title}"\n\n`;
           },
           error: () => {
             this.snackBar.open('Error al mover tarea', 'Cerrar', { duration: 3000 });
